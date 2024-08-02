@@ -1,10 +1,9 @@
+@testitem "ProtocolZoo Switch" tags[:protocolzoo_switch] begin
 using Revise
-using QuantumSavory
 using ResumableFunctions
 using ConcurrentSim
 using QuantumSavory.ProtocolZoo
 using Graphs
-using Test
 
 if isinteractive()
     using Logging
@@ -13,7 +12,9 @@ if isinteractive()
     println("Logger set to debug")
 end
 
-@testset "SimpleSwitchDiscreteProt" begin
+end
+
+@testitem "ProtocolZoo Switch - SimpleSwitchDiscreteProt" tags[:protocolzoo_switch] begin
     n = 5 # number of clients
     m = n-2 # memory slots in switch
     graph = star_graph(n+1) # index 1 corresponds to the switch
@@ -41,4 +42,5 @@ end
     res = query(net[2], EntanglementCounterpart, ❓, ❓)
     @test abs(observable([res.slot, net[3][res.tag[3]]], X⊗X)) ≈ 1.0 # we are not running an EntanglementTracker so Pauli corrections are not applied
     @test abs(observable([res.slot, net[3][res.tag[3]]], Z⊗Z)) ≈ 1.0 # we are not running an EntanglementTracker so Pauli corrections are not applied
+end
 end

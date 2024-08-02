@@ -1,6 +1,5 @@
-using QuantumSavory
+@testitem "Circuit Zoo Purification" tags[:circuitzoo_purification] begin
 using QuantumSavory.CircuitZoo
-using Test
 using QuantumSavory.CircuitZoo: EntanglementSwap, Purify2to1, Purify3to1, Purify3to1Node, Purify2to1Node, PurifyStringent, StringentHead, StringentBody, PurifyExpedient, PurifyStringentNode, PurifyExpedient
 
 
@@ -38,7 +37,9 @@ end
 @test_throws ArgumentError PurifyStringent()(r[1], r[2], r[3:2:21]...)
 
 
-@testset "2to1" begin
+end
+
+@testitem "Circuit Zoo Purification - 2to1" tags[:circuitzoo_purification] begin
     for rep in [QuantumOpticsRepr, CliffordRepr]
         for leaveout in [:X, :Y, :Z]
             # test that pure state gets mapped to pure state
@@ -64,7 +65,9 @@ end
     end
 end
 
-@testset "2to1 - Node" begin
+end
+
+@testitem "Circuit Zoo Purification - 2to1 - Node" tags[:circuitzoo_purification] begin
     for rep in [QuantumOpticsRepr, CliffordRepr]
         for leaveout in [:X, :Y, :Z]
             # test that pure state gets mapped to pure state
@@ -95,7 +98,9 @@ end
     end
 end
 
-@testset "3to1" begin
+end
+
+@testitem "Circuit Zoo Purification - 3to1" tags[:circuitzoo_purification] begin
     for rep in [QuantumOpticsRepr, CliffordRepr]
         for leaveout1 in [:X, :Y, :Z]
             for leaveout2 in [:X, :Y, :Z]
@@ -134,7 +139,9 @@ end
     end
 end
 
-@testset "3to1 - Fidelity - QuantumOpticsRepr" begin
+end
+
+@testitem "Circuit Zoo Purification - 3to1 - Fidelity - QuantumOpticsRepr" tags[:circuitzoo_purification] begin
     for rep in [QuantumOpticsRepr]
         for leaveout1 in [:X, :Y, :Z]
             for leaveout2 in [:X, :Y, :Z]
@@ -154,7 +161,9 @@ end
     end
 end
 
-@testset "3to1 - Fidelity - CliffordRepr" begin
+end
+
+@testitem "Circuit Zoo Purification - 3to1 - Fidelity - CliffordRepr" tags[:circuitzoo_purification] begin
     for rep in [CliffordRepr]
         for leaveout1 in [:X, :Y, :Z]
             for leaveout2 in [:X, :Y, :Z]
@@ -174,7 +183,9 @@ end
 end
 
 
-@testset "3to1 - Node" begin
+end
+
+@testitem "Circuit Zoo Purification - 3to1 - Node" tags[:circuitzoo_purification] begin
     for rep in [QuantumOpticsRepr, CliffordRepr]
         for leaveout1 in [:X, :Y, :Z]
             for leaveout2 in [:X, :Y, :Z]
@@ -223,7 +234,9 @@ end
     end
 end
 
-@testset "3to1 - Node - Fidelity - QuantumOpticsRepr" begin
+end
+
+@testitem "Circuit Zoo Purification - 3to1 - Node - Fidelity - QuantumOpticsRepr" tags[:circuitzoo_purification] begin
     for rep in [QuantumOpticsRepr]
         for leaveout1 in [:X, :Y, :Z]
             for leaveout2 in [:X, :Y, :Z]
@@ -245,7 +258,9 @@ end
     end
 end
 
-@testset "3to1 - Node - Fidelity - CliffordRepr" begin
+end
+
+@testitem "Circuit Zoo Purification - 3to1 - Node - Fidelity - CliffordRepr" tags[:circuitzoo_purification] begin
     for rep in [CliffordRepr]
         for leaveout1 in [:X, :Y, :Z]
             for leaveout2 in [:X, :Y, :Z]
@@ -266,7 +281,9 @@ end
     end
 end
 
-@testset "Stringent" begin
+end
+
+@testitem "Circuit Zoo Purification - Stringent" tags[:circuitzoo_purification] begin
     for rep in [CliffordRepr, QuantumOpticsRepr]
         r = Register(26, rep())
         for i in 1:13
@@ -277,7 +294,9 @@ end
     end
 end
 
-@testset "Stringent - Fidelity - QuantumOpticsRepr" begin
+end
+
+@testitem "Circuit Zoo Purification - Stringent - Fidelity - QuantumOpticsRepr" tags[:circuitzoo_purification] begin
     for rep in [QuantumOpticsRepr]
         r = Register(26, rep())
         rnd = rand() / 4 + 0.5
@@ -291,7 +310,9 @@ end
     end
 end
 
-@testset "Stringent - Fidelity - CliffordRepr" begin
+end
+
+@testitem "Circuit Zoo Purification - Stringent - Fidelity - CliffordRepr" tags[:circuitzoo_purification] begin
     for rep in [CliffordRepr]
         r = Register(26, rep())
         noisy_pair = stab_noisy_pair_func(0)
@@ -304,7 +325,9 @@ end
     end
 end
 
-@testset "Expedient" begin
+end
+
+@testitem "Circuit Zoo Purification - Expedient" tags[:circuitzoo_purification] begin
     for rep in [CliffordRepr, QuantumOpticsRepr]
         r = Register(22, rep())
         for i in 1:11
@@ -315,7 +338,9 @@ end
     end
 end
 
-@testset "Expedient - Fidelity - QuantumOpticsRepr" begin
+end
+
+@testitem "Circuit Zoo Purification - Expedient - Fidelity - QuantumOpticsRepr" tags[:circuitzoo_purification] begin
     for rep in [QuantumOpticsRepr]
         r = Register(22, rep())
         rnd = rand() / 4 + 0.5
@@ -329,7 +354,9 @@ end
     end
 end
 
-@testset "Expedient - Fidelity - CliffordRepr" begin
+end
+
+@testitem "Circuit Zoo Purification - Expedient - Fidelity - CliffordRepr" tags[:circuitzoo_purification] begin
     for rep in [CliffordRepr]
         r = Register(22, rep())
         noisy_pair = stab_noisy_pair_func(0)
@@ -340,4 +367,5 @@ end
             @test_broken observable(r[1:2], projector(bell)) ≈ 0.0 # This is a probabilistic test. It has a small chance of triggering
         end
     end
+end
 end

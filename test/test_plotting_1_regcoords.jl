@@ -1,8 +1,7 @@
-using Test
+@testitem "Plotting 1 Register Coordinates" tags[:plotting_1_regcoords] begin
 #using CairoMakie
 #using GLMakie
 using FileIO
-using QuantumSavory
 
 sizes = [2,3,2,5,6,2,3]
 registers = Register[]
@@ -57,3 +56,4 @@ for e in edges(network)
 end
 notify(netobs3)
 display(fig3)
+end

@@ -1,3 +1,4 @@
+@testitem "Examples" tags[:examples] begin
 @safetestset "colorcentermodularcluster" begin
     include("../examples/colorcentermodularcluster/1_time_to_connected.jl")
     if get(ENV,"QUANTUMSAVORY_PLOT_TEST","")=="true"
@@ -39,4 +40,4 @@ end
 if get(ENV,"QUANTUMSAVORY_PLOT_TEST","")=="true"
     import GLMakie
     GLMakie.closeall() # to avoid errors when running headless
-end
+endend

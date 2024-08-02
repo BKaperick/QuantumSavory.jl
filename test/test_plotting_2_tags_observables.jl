@@ -1,4 +1,4 @@
-using QuantumSavory
+@testitem "Plotting 2 Register Coordinates" tags[:plotting_2_tags_observables] begin
 #using CairoMakie
 #using GLMakie
 using Graphs
@@ -95,3 +95,4 @@ tag!(net[3,1], Tag(:sometag, 10, 20))
 initialize!(net[2,1], X1)
 p = registernetplot_axis(fig[1,1], net, observables=[(X, ((1,2),)), (X⊗X⊗X, ((1,1),(2,2),(3,2)))], infocli=false)
 display(fig)
+end

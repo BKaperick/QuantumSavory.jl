@@ -1,8 +1,7 @@
-using QuantumSavory
+@testitem "ProtocolZoo Entanglement Consumer" tags[:protocolzoo_entanglement_consumer] begin
 using QuantumSavory.ProtocolZoo: EntanglerProt, SwapperProt, EntanglementTracker, EntanglementConsumer
 using Graphs
 using ConcurrentSim
-using Test
 
 if isinteractive()
     using Logging
@@ -44,4 +43,5 @@ for n in 3:30
         end
     end
 
+end
 end
