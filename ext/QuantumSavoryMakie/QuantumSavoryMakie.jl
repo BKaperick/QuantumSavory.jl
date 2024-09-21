@@ -150,7 +150,7 @@ function Makie.plot!(rn::RegisterNetPlot{<:Tuple{RegisterNet}})
         ## the colors and locations for various observables
         if !isnothing(rn[:observables][])
         for (O, rsidx, links) in rn[:observables][]
-            val = real(observable(tuple((network[rs...] for rs in rsidx)...), O, NaN))
+            val = real(observable(tuple((network[rs...] for rs in rsidx)...), O; something=NaN))
             # TODO issue a warning if val has (percentage-wise) significant imaginary component (here, for plotting, when we implicitly are taking the real part)
             for (iʳᵉᵍ, iˢˡᵒᵗ) in rsidx
                 xˢ = registercoords[iʳᵉᵍ][1]
@@ -240,7 +240,7 @@ end
 
 function get_state_vis_string(backrefs, i)
     state, register, registeridx, slot, subsystem = backrefs[i]
-    tags = register.tags[slot]
+    tags = [ti.tag for ti in values(register.tag_info) if ti.slot==slot]
     tags_str = if isempty(tags)
         "not tagged"
     else
@@ -264,15 +264,15 @@ function Makie.process_interaction(handler::RNHandler, event::Makie.MouseEvent, 
     #else
     if plot===rn[:register_slots_scatterplot][]
         register, registeridx, slot = rn[:register_slots_coords_backref][][index]
-        run(`clear`)
+        try run(`clear`) catch end
         println("Register $registeridx | Slot $(slot)\n Details: $(register)")
     elseif plot===rn[:state_scatterplot][]
         state, reg, registeridx, slot, subsystem = rn[:state_coords_backref][][index]
-        run(`clear`)
+        try run(`clear`) catch end
         println("Subsystem stored in Register $(registeridx) | Slot $(slot)\n Subsystem $(subsystem) of $(state)")
     elseif plot===rn[:observables_scatterplot][]
         o, val = rn[:observables_backref][][index]
-        run(`clear`)
+        try run(`clear`) catch end
         println("Observable $(o) has value $(val)")
     end
     false
